@@ -35,7 +35,7 @@ const FT = db.define('ft', {
   2 - background color
   */
   features: {
-    type: Sequelize.ARRAY(Sequelize. TEXT),
+    type: Sequelize.ARRAY(Sequelize.TEXT),
     allowNull: false,
     validate: {
       notEmpty: true
