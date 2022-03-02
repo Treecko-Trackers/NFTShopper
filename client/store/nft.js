@@ -15,7 +15,8 @@ const gotAllFTs = (FTs) => {
 export const fetchFTs = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('/nft');
+      const { data } = await axios.get('/api/nft');
+      // console.log('data', data);
       dispatch(gotAllFTs(data));
     } catch (error) {
       console.log('fetchFTs error: ', error);
@@ -24,13 +25,11 @@ export const fetchFTs = () => {
 };
 
 // REDUCER
-const initialState = {
-  allFTs: [],
-};
+const initialState = [];
 export default function FTReducer(state = initialState, action) {
   switch (action.type) {
     case GOT_ALL_FT:
-      return { ...state, allFTs: action.FTs };
+      return action.FTs;
     default:
       return state;
   }

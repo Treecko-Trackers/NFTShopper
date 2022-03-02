@@ -4,11 +4,11 @@ const {
 } = require('../db');
 module.exports = router;
 
-// GET /nft
+// GET api/nft
 router.get('/', async (req, res, next) => {
   try {
-    const { users } = await FT.findAll();
-    res.json(users);
+    const data = await FT.findAll();
+    res.json(data);
   } catch (err) {
     next(err);
   }

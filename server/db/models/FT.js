@@ -51,4 +51,4 @@ const FT = db.define('ft', {
   }
 
 })
-module.exports(FT)
+module.exports = FT

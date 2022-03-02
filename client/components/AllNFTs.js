@@ -1,33 +1,78 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchFTs } from '../store/nft';
 import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
-const AllNFTs = () => {
-const dispatch = useDispatch()
-const [FTs, setFTs] = useState([])
-const AllFTs = useSelector(state => state.FTs)
-
-useEffect(() => {
-  dispatch(fetchFTs())
-}, [])
-
-useEffect(() => {
-  async function getAllFTs() {
-    try {
-      const {data} = await axios.get('/nft')
-      setFTs(data)
-    } catch (error) {
-      console.log(error)
-    }
+export class AllNFTs extends React.Component {
+  constructor(props) {
+    super(props);
   }
-  getAllFTs()
-},[])
+  // const dispatch = useDispatch();
+  // const [AllFTs, setAllFTs] = useState([]);
+  // const { FTs } = useSelector((state) => ({ FTs: state.FTs }));
 
-  return (
-      {FT.map((item) => (
-        <div key={item.id}>{item.name}</div>
-      ))}
-  );
+  // useEffect(() => {
+  //   props.fetchFTs();
+  //   if (props.allFTs) setAllFTs(...props.allFTs);
+  //   console.log('props', props.allFTs);
+  // }, []);
+  componentDidMount() {
+    this.props.fetchFTs();
+  }
+  render() {
+    return this.props.allFTs ? (
+      <div>
+        {this.props.allFTs.map((item) => (
+          <div key={item.id}>
+            <h1>{item.name}</h1>
+            <img
+              src={item.imageUrl}
+              style={{ width: '200px', height: '200px' }}
+            />
+            <h2>${item.price}</h2>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div>{'loading'}</div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    allFTs: state.allFTs,
+  };
 };
 
-export default AllNFTs;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchFTs: () => dispatch(fetchFTs()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllNFTs);
+
+// const AllNFTs = (props) => {
+//   const dispatch = useDispatch();
+//   const [AllFTs, setAllFTs] = useState([]);
+//   // const { FTs } = useSelector((state) => ({ FTs: state.FTs }));
+//   // const allFTs = useSelector(state => state.allFTs)
+//   useEffect(() => {
+//     dispatch(fetchFTs());
+//     setAllFTs(AllFTs);
+//     console.log('props', props);
+//   }, []);
+
+//   return AllFTs ? (
+//     <div>
+//       {AllFTs.map((item) => (
+//         <div key={item.id}>{item.name}</div>
+//       ))}
+//     </div>
+//   ) : (
+//     <div>{'loading'}</div>
+//   );
+// };
+
+// export default AllNFTs;

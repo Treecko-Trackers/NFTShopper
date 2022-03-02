@@ -5,7 +5,7 @@ import AllNFTs from './components/AllNFTs';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import { me } from './store';
-
+import { fetchFTs } from './store/nft';
 /**
  * COMPONENT
  */
@@ -21,15 +21,16 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
+            <Route path="/NFTs" component={AllNFTs} />
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
+            <Route path="/NFTs" component={AllNFTs} />
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/NFTs" component={AllNFTs} />
           </Switch>
         )}
       </div>

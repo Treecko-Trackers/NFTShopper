@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import FTReducer from './nft';
 
-const reducer = combineReducers({ auth, FTReducer });
+const reducer = combineReducers({ auth, allFTs: FTReducer });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
