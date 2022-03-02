@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchFTs } from '../store/nft';
+import { fetchNFTs } from '../store/nft';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -18,14 +18,13 @@ export class AllNFTs extends React.Component {
   //   console.log('props', props.allFTs);
   // }, []);
   componentDidMount() {
-    this.props.fetchFTs();
+    this.props.fetchNFTs();
   }
   render() {
-    return this.props.allFTs ? (
+    return this.props.allNFTs ? (
       <div>
-        {this.props.allFTs.map((item) => (
-            <Link to={`/NFTs/${item.id}`}>
-            <div key={item.id}>
+        {this.props.allNFTs.map((item) => (
+          <div key={item.id}>
             <h1>{item.name}</h1>
             <img
               src={item.imageUrl}
@@ -33,7 +32,6 @@ export class AllNFTs extends React.Component {
             />
             <h2>${item.price}</h2>
           </div>
-        </Link>
         ))}
       </div>
     ) : (
@@ -44,13 +42,13 @@ export class AllNFTs extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    allFTs: state.allFTs,
+    allNFTs: state.allNFTs,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchFTs: () => dispatch(fetchFTs()),
+    fetchNFTs: () => dispatch(fetchNFTs()),
   };
 };
 
