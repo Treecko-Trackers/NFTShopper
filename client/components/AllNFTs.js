@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchFTs } from '../store/nft';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class AllNFTs extends React.Component {
   constructor(props) {
@@ -23,7 +24,8 @@ export class AllNFTs extends React.Component {
     return this.props.allFTs ? (
       <div>
         {this.props.allFTs.map((item) => (
-          <div key={item.id}>
+            <Link to={`/NFTs/${item.id}`}>
+            <div key={item.id}>
             <h1>{item.name}</h1>
             <img
               src={item.imageUrl}
@@ -31,6 +33,7 @@ export class AllNFTs extends React.Component {
             />
             <h2>${item.price}</h2>
           </div>
+        </Link>
         ))}
       </div>
     ) : (
