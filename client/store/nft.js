@@ -4,7 +4,7 @@ import axios from 'axios';
 const GOT_ALL_NFT = 'GOT_ALL_NFT';
 
 // ACTION CREATORS
-const gotAllFTs = (NFTs) => {
+const gotAllNFTs = (NFTs) => {
   return {
     type: GOT_ALL_NFT,
     NFTs,
@@ -17,7 +17,7 @@ export const fetchNFTs = () => {
     try {
       const { data } = await axios.get('/api/nft');
       // console.log('data', data);
-      dispatch(gotAllFTs(data));
+      dispatch(gotAllNFTs(data));
     } catch (error) {
       console.log('fetchNFTs error: ', error);
     }

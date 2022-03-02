@@ -7,8 +7,8 @@ const Cart = require('./models/Cart');
 const NFT = require('./models/NFT');
 
 //associations could go here!
-// Cart.belongsToMany(FT, { through: Cart_FT });
-// FT.belongsToMany(Cart, { through: Cart_FT });
+// Cart.belongsToMany(NFT, { through: Cart_NFT });
+// NFT.belongsToMany(Cart, { through: Cart_NFT });
 
 // Cart.belongsTo(User);
 // User.hasOne(Cart);
