@@ -6,6 +6,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import { me } from './store';
 import { fetchFTs } from './store/nft';
+import  SingleNft  from './components/SingleNft';
 /**
  * COMPONENT
  */
@@ -28,6 +29,7 @@ class Routes extends Component {
         ) : (
           <Switch>
             <Route path="/NFTs" component={AllNFTs} />
+            <Route exact path="/NFTs/:nftid" component={SingleNft} />
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />

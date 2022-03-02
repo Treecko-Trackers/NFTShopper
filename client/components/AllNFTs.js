@@ -24,7 +24,8 @@ export class AllNFTs extends React.Component {
     return this.props.allNFTs ? (
       <div>
         {this.props.allNFTs.map((item) => (
-          <div key={item.id}>
+          <Link key={item.id} to={`/NFTs/${item.id}`}>
+          <div>
             <h1>{item.name}</h1>
             <img
               src={item.imageUrl}
@@ -32,6 +33,7 @@ export class AllNFTs extends React.Component {
             />
             <h2>${item.price}</h2>
           </div>
+        </Link>
         ))}
       </div>
     ) : (
