@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getSingleNFT } from "../store/nft";
+import { getSingleNFT } from "../store/singleNft";
 
 class SingleNft extends React.Component {
   constructor(props) {
@@ -9,11 +9,12 @@ class SingleNft extends React.Component {
 
   componentDidMount() {
     this.props.getSingleNft(this.props.match.params.nftid);
-    console.log(this.props.singleNft);
+
+    console.log(this.props.nft, "single nft");
     console.log("id:", this.props.match.params.nftid);
   }
   render() {
-    return this.props.singleNft ? (
+    return this.props.nft ? (
       <div
         style={{
           textAlign: "center",
@@ -24,14 +25,11 @@ class SingleNft extends React.Component {
           minHeight: "100vh",
         }}
       >
-        <img
-          src={this.props.singleNft.imageUrl}
-          style={{ maxWidth: "400px" }}
-        />
-        <h1>{this.props.singleNft.name}</h1>
-        <h3>{this.props.singleNft.artist}</h3>
-        <p>${this.props.singleNft.price}</p>
-        <p>Quantity: {this.props.singleNft.quantity}</p>
+        <img src={this.props.nft.imageUrl} style={{ maxWidth: "400px" }} />
+        <h1>{this.props.nft.name}</h1>
+        <h3>{this.props.nft.artist}</h3>
+        <p>${this.props.nft.price}</p>
+        <p>Quantity: {this.props.nft.quantity}</p>
       </div>
     ) : (
       "loading"
@@ -39,7 +37,7 @@ class SingleNft extends React.Component {
   }
 }
 const mapState = (state) => ({
-  singleNft: state.allNFTs,
+  nft: state.singleNFT,
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),
