@@ -19,6 +19,7 @@ export class AllNFTs extends React.Component {
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
+    console.log(this.props);
   }
   render() {
     return this.props.allNFTs ? (

@@ -23,7 +23,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/NFTs" component={AllNFTs} />
             <Route exact path="/NFTs/:nftid" component={SingleNft} />
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={AllNFTs} />
             <Redirect to="/home" />
           </Switch>
         ) : (
