@@ -1,35 +1,35 @@
 import axios from 'axios';
 
 // ACTION TYPES
-const GOT_ALL_FT = 'GOT_ALL_FT';
+const GOT_ALL_NFT = 'GOT_ALL_NFT';
 
 // ACTION CREATORS
-const gotAllFTs = (FTs) => {
+const gotAllFTs = (NFTs) => {
   return {
-    type: GOT_ALL_FT,
-    FTs,
+    type: GOT_ALL_NFT,
+    NFTs,
   };
 };
 
 // THUNK
-export const fetchFTs = () => {
+export const fetchNFTs = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get('/api/nft');
       // console.log('data', data);
       dispatch(gotAllFTs(data));
     } catch (error) {
-      console.log('fetchFTs error: ', error);
+      console.log('fetchNFTs error: ', error);
     }
   };
 };
 
 // REDUCER
 const initialState = [];
-export default function FTReducer(state = initialState, action) {
+export default function NFTReducer(state = initialState, action) {
   switch (action.type) {
-    case GOT_ALL_FT:
-      return action.FTs;
+    case GOT_ALL_NFT:
+      return action.NFTs;
     default:
       return state;
   }

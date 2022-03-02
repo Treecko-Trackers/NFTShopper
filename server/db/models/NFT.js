@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const FT = db.define('ft', {
+const NFT = db.define('nft', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -51,4 +51,4 @@ const FT = db.define('ft', {
   }
 
 })
-module.exports = FT
+module.exports = NFT

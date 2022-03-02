@@ -3,9 +3,9 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
-import FTReducer from './nft';
+import NFTReducer from './nft';
 
-const reducer = combineReducers({ auth, allFTs: FTReducer });
+const reducer = combineReducers({ auth, allNFTs: NFTReducer });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
