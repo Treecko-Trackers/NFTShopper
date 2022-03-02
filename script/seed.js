@@ -1,7 +1,7 @@
 'use strict'
 
-const {db, models: {FT} } = require('../server/db')
-const fts  = require('./data')
+const {db, models: {NFT} } = require('../server/db')
+const nfts  = require('./data')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -13,8 +13,8 @@ async function seed() {
 
   // Creating Users
   await Promise.all(
-    fts.map((ft) => {
-      return FT.create(ft)
+    nfts.map((nft) => {
+      return NFT.create(nft)
   })
   )
 

@@ -4,7 +4,7 @@ const db = require('./db');
 
 const User = require('./models/User');
 const Cart = require('./models/Cart');
-const FT = require('./models/FT');
+const NFT = require('./models/NFT');
 
 //associations could go here!
 // Cart.belongsToMany(FT, { through: Cart_FT });
@@ -18,6 +18,6 @@ module.exports = {
   models: {
     User,
     Cart,
-    FT,
+    NFT,
   },
 };
