@@ -18,7 +18,7 @@ const NFT = db.define('nft', {
   },
   artist: {
     type: Sequelize.STRING,
-    defaultValue: 'Grace Hopper'
+    defaultValue: 'Grace_Hopper'
   },
 
   quantity: {
