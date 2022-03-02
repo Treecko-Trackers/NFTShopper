@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { fetchNFTs } from '../store/nft';
-import { useDispatch, useSelector } from 'react-redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { fetchNFTs } from "../store/nft";
+import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 export class AllNFTs extends React.Component {
   constructor(props) {
@@ -25,19 +25,19 @@ export class AllNFTs extends React.Component {
       <div>
         {this.props.allNFTs.map((item) => (
           <Link key={item.id} to={`/NFTs/${item.id}`}>
-          <div>
-            <h1>{item.name}</h1>
-            <img
-              src={item.imageUrl}
-              style={{ width: '200px', height: '200px' }}
-            />
-            <h2>${item.price}</h2>
-          </div>
-        </Link>
+            <div>
+              <h1>{item.name}</h1>
+              <img
+                src={item.imageUrl}
+                style={{ width: "200px", height: "200px" }}
+              />
+              <h2>${item.price}</h2>
+            </div>
+          </Link>
         ))}
       </div>
     ) : (
-      <div>{'loading'}</div>
+      <div>{"loading"}</div>
     );
   }
 }
