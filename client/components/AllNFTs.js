@@ -19,7 +19,7 @@ export class AllNFTs extends React.Component {
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
-    if (!Object.keys(cart)) {
+    if (!('Cart' in localStorage)) {
       localStorage.setItem('Cart', JSON.stringify({}));
     }
   }
