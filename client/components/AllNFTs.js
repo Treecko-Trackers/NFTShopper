@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchNFTs } from '../store/nft';
+import { fetchNFTs} from '../store/nft';
+import {createOrder} from '../store/order'
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -19,8 +20,10 @@ export class AllNFTs extends React.Component {
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
+    console.log(this.props.userId)
     if (!('Cart' in localStorage)) {
       localStorage.setItem('Cart', JSON.stringify({}));
+      this.props.createOrder(this.props.userId)
     }
   }
   render() {
@@ -48,12 +51,14 @@ export class AllNFTs extends React.Component {
 const mapStateToProps = (state) => {
   return {
     allNFTs: state.allNFTs,
+    userId: state.auth.id
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchNFTs: () => dispatch(fetchNFTs()),
+    createOrder: (userId) => dispatch(createOrder(userId))
   };
 };
 

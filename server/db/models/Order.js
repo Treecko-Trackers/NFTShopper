@@ -10,8 +10,9 @@ const Order = db.define('order', {
       key: 'id',
     },
   },
-  total: {
-    type: Sequelize.INTEGER,
+  isFulfilled: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
 });
 

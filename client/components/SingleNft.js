@@ -18,7 +18,6 @@ class SingleNft extends React.Component {
     let id = this.props.nft.id
     if (id in cart) {
       cart[id][1]++
-      console.log(cart)
       localStorage.setItem(
         'Cart',
         JSON.stringify(cart)

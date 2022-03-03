@@ -30,12 +30,8 @@ const OrderDetail = db.define('orderDetail', {
     allowNull: false,
     validate: {
       notEmpty: true,
-    },
-  },
-  status: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
+    }
+  }
 });
 
 module.exports = OrderDetail;
