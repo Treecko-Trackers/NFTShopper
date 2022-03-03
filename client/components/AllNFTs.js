@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { fetchNFTs } from "../store/nft";
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { fetchNFTs } from '../store/nft';
+import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class AllNFTs extends React.Component {
   constructor(props) {
@@ -19,7 +19,9 @@ export class AllNFTs extends React.Component {
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
-    console.log(this.props);
+    if (!Object.keys(cart)) {
+      localStorage.setItem('Cart', JSON.stringify({}));
+    }
   }
   render() {
     return this.props.allNFTs ? (
@@ -30,7 +32,7 @@ export class AllNFTs extends React.Component {
               <h1>{item.name}</h1>
               <img
                 src={item.imageUrl}
-                style={{ width: "200px", height: "200px" }}
+                style={{ width: '200px', height: '200px' }}
               />
               <h2>${item.price}</h2>
             </div>
@@ -38,7 +40,7 @@ export class AllNFTs extends React.Component {
         ))}
       </div>
     ) : (
-      <div>{"loading"}</div>
+      <div>{'loading'}</div>
     );
   }
 }

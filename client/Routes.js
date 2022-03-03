@@ -1,11 +1,12 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import AllNFTs from "./components/AllNFTs";
-import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
-import { me } from "./store";
-import SingleNft from "./components/SingleNft";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
+import AllNFTs from './components/AllNFTs';
+import { Login, Signup } from './components/AuthForm';
+import Home from './components/Home';
+import { me } from './store';
+import SingleNft from './components/SingleNft';
+import Cart from './components/Cart';
 /**
  * COMPONENT
  */
@@ -21,6 +22,7 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
+            <Route exact path="/cart" component={Cart} />
             <Route exact path="/NFTs" component={AllNFTs} />
             <Route exact path="/NFTs/:nftid" component={SingleNft} />
             <Route path="/home" component={AllNFTs} />
@@ -28,6 +30,7 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
+            <Route exact path="/cart" component={Cart} />
             <Route exact path="/NFTs" component={AllNFTs} />
             <Route exact path="/NFTs/:nftid" component={SingleNft} />
             <Route path="/" exact component={Login} />
