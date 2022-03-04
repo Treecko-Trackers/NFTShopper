@@ -30,7 +30,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/NFTs" component={AllNFTs} />
             <Route exact path="/NFTs/:nftid" component={SingleNft} />
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={AllNFTs} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>
