@@ -20,5 +20,6 @@ module.exports = {
     User,
     Order,
     NFT,
+    OrderDetail,
   },
 };
