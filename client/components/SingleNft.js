@@ -14,21 +14,14 @@ class SingleNft extends React.Component {
     // console.log("id:", this.props.match.params.nftid);
   }
   handleSubmit() {
-    let cart = JSON.parse(localStorage.getItem('Cart'))
-    let id = this.props.nft.id
+    let cart = JSON.parse(localStorage.getItem('Cart'));
+    let id = this.props.nft.id;
     if (id in cart) {
-      cart[id][1]++
-      localStorage.setItem(
-        'Cart',
-        JSON.stringify(cart)
-      );
-    }
-    else {
-      cart[id] = [this.props.nft, 1]
-      localStorage.setItem(
-        'Cart',
-        JSON.stringify(cart)
-      );
+      cart[id][1]++;
+      localStorage.setItem('Cart', JSON.stringify(cart));
+    } else {
+      cart[id] = [this.props.nft, 1];
+      localStorage.setItem('Cart', JSON.stringify(cart));
     }
   }
 
