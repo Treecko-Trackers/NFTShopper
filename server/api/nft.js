@@ -1,15 +1,11 @@
-const router = require('express').Router();
-<<<<<<< HEAD
-
-=======
->>>>>>> d9d315aea62c4e17e77532d1e963d67b4463674e
+const router = require("express").Router();
 const {
   models: { NFT },
-} = require('../db');
+} = require("../db");
 module.exports = router;
 
 // GET api/nft
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const data = await NFT.findAll();
     res.json(data);
@@ -18,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 // Get api/nft/:nftid
-router.get('/:nftid', async (req, res, next) => {
+router.get("/:nftid", async (req, res, next) => {
   try {
     const nft = await NFT.findByPk(req.params.nftid);
     res.json(nft);
@@ -27,7 +23,7 @@ router.get('/:nftid', async (req, res, next) => {
   }
 });
 // Get api/nft/category/artist/Grace_Hopper
-router.get('/category/artist/:artist', async (req, res, next) => {
+router.get("/category/artist/:artist", async (req, res, next) => {
   try {
     const nfts = await NFT.findAll({
       where: {
@@ -40,7 +36,7 @@ router.get('/category/artist/:artist', async (req, res, next) => {
   }
 });
 // Get api/nft/category/animal/animalName
-router.get('/category/animal/:animal', async (req, res, next) => {
+router.get("/category/animal/:animal", async (req, res, next) => {
   try {
     const nfts = await NFT.findAll();
     res.send(
@@ -51,7 +47,7 @@ router.get('/category/animal/:animal', async (req, res, next) => {
   }
 });
 // Get api/nft/category/hat/withHat
-router.get('/category/hat/:withHat', async (req, res, next) => {
+router.get("/category/hat/:withHat", async (req, res, next) => {
   try {
     const nfts = await NFT.findAll();
     res.send(
@@ -63,7 +59,7 @@ router.get('/category/hat/:withHat', async (req, res, next) => {
 });
 
 // Get api/nft/category/background/backgroundColor
-router.get('/category/background/:color', async (req, res, next) => {
+router.get("/category/background/:color", async (req, res, next) => {
   try {
     const nfts = await NFT.findAll();
     res.send(

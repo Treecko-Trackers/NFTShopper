@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../store';
-=======
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
->>>>>>> d9d315aea62c4e17e77532d1e963d67b4463674e
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
