@@ -1,5 +1,8 @@
 const router = require('express').Router();
+<<<<<<< HEAD
 
+=======
+>>>>>>> d9d315aea62c4e17e77532d1e963d67b4463674e
 const {
   models: { NFT },
 } = require('../db');
