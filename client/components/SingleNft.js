@@ -5,13 +5,14 @@ import { getSingleNFT } from "../store/singleNft";
 class SingleNft extends React.Component {
   constructor(props) {
     super(props);
+    this.addToCartHandler = this.addToCartHandler.bind(this);
   }
 
   componentDidMount() {
     this.props.getSingleNft(this.props.match.params.nftid);
-
-    console.log(this.props.nft, "single nft");
-    console.log("id:", this.props.match.params.nftid);
+  }
+  addToCartHandler() {
+    console.log("works");
   }
   render() {
     return this.props.nft ? (
@@ -30,6 +31,7 @@ class SingleNft extends React.Component {
         <h3>{this.props.nft.artist}</h3>
         <p>${this.props.nft.price}</p>
         <p>Quantity: {this.props.nft.quantity}</p>
+        <button onClick={this.addToCartHandler}>Add To Cart</button>
       </div>
     ) : (
       "loading"
