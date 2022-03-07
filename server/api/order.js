@@ -16,7 +16,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const order = await Order.Create({ userId: id });
+  const order = await Order.create({ userId: id });
+  res.send(order);
 });
 
 //Filtered Order
