@@ -24,7 +24,7 @@ export const createOrder = (userId) => {
     try {
       console.log('think');
       const { data } = await axios.post(`/api/order/${userId}`);
-      console.log(data);
+      // console.log(data);
       dispatch(create_Order(data));
     } catch (err) {
       console.log('createOrder error: ', err);
@@ -35,7 +35,7 @@ export const gotOrder = (userId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/order/${userId}`);
-      console.log('gotorderthunk', data);
+      // console.log('gotorderthunk', data);
       dispatch(get_Order(data));
     } catch (error) {
       console.log('gotOrder Thunk Error: ', error);

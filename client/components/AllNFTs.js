@@ -9,27 +9,19 @@ export class AllNFTs extends React.Component {
   constructor(props) {
     super(props);
   }
-  // const dispatch = useDispatch();
-  // const [AllFTs, setAllFTs] = useState([]);
-  // const { FTs } = useSelector((state) => ({ FTs: state.FTs }));
-
-  // useEffect(() => {
-  //   props.fetchFTs();
-  //   if (props.allFTs) setAllFTs(...props.allFTs);
-  //   console.log('props', props.allFTs);
-  // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
     console.log(this.props.userId);
-    if (!('Cart' in localStorage)) {
-      localStorage.setItem('Cart', JSON.stringify({}));
+    // if (!('Cart' in localStorage)) {
+    //   localStorage.setItem('Cart', JSON.stringify({}));
+    //   this.props.createOrder(this.props.userId);
+    // }
+    if (this.props.gotOrder(this.props.userId)) {
       this.props.createOrder(this.props.userId);
     }
-    if (this.props.gotOrder(this.props.userId) === false) {
-      this.props.createOrder(this.props.userId);
-    } else {
-      this.props.gotOrder(this.props.userId);
-    }
+    // else {
+    //   this.props.gotOrder(this.props.userId);
+    // }
     // console.log('id', this.props.userId);
     // console.log('order', this.props.gotOrder(this.props.userId));
   }

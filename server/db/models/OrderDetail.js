@@ -6,6 +6,7 @@ const Order = require('./Order');
 const OrderDetail = db.define('orderDetail', {
   orderId: {
     type: Sequelize.INTEGER,
+    unique: false,
     references: {
       model: Order,
       key: 'id',
@@ -13,6 +14,7 @@ const OrderDetail = db.define('orderDetail', {
   },
   nftId: {
     type: Sequelize.INTEGER,
+    unique: false,
     references: {
       model: NFT,
       key: 'id',
@@ -30,8 +32,8 @@ const OrderDetail = db.define('orderDetail', {
     allowNull: false,
     validate: {
       notEmpty: true,
-    }
-  }
+    },
+  },
 });
 
 module.exports = OrderDetail;

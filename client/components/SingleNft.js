@@ -12,17 +12,13 @@ class SingleNft extends React.Component {
 
   componentDidMount() {
     this.props.getSingleNft(this.props.match.params.nftid);
-    // console.log(this.props.nft, "single nft");
-    // console.log("id:", this.props.match.params.nftid);
-    // this.props.gotNFT(this.props.match.params.orderId);
-    this.props.boughtNFT(this.props.nftId);
-    console.log('orderId: ', this.props.match.params.orderId);
-    console.log('nftid', this.props.nftId);
-    if (this.props.gotOrder(this.props.userId) === false) {
-      // this.props.createOrder(this.props.userId);
-    } else {
-      this.props.gotOrder(this.props.userId);
-    }
+    this.props.gotOrder(this.props.userId);
+    // if (this.props.gotOrder(this.props.userId) === false) {
+    //   // this.props.createOrder(this.props.userId);
+    // } else {
+    //   this.props.gotOrder(this.props.userId);
+    // }
+    // this.props.gotNFT(this.props.order[0].id);
   }
   // handleSubmit() {
   //   let cart = JSON.parse(localStorage.getItem('Cart'));
@@ -36,19 +32,21 @@ class SingleNft extends React.Component {
   //   }
   // }
   handleSubmit() {
-    console.log('nft', this.props.nft);
-    this.props.gotOrder(this.props.userId);
-
+    // this.props.gotOrder(this.props.userId);
+    this.props.gotNFT(this.props.order[0].id);
+    console.log('orderDetail', this.props.orderDetail);
     let id = this.props.nft.id;
-    console.log('fml', this.props.order);
-    console.log(
-      this.props.boughtNFT({
-        orderId: this.props.order[0].id,
-        nftId: id,
-        price: this.props.nft.price,
-        quantity: 1,
-      })
-    );
+    if (
+      this.props.orderDetail.filter((orderDetail) => orderDetail.nftId === id)
+    )
+      this.props.orderDetail.quantity = this.props.orderDetail.quantity + 1;
+    // this.props.gotOrder(this.props.userId);
+    this.props.boughtNFT({
+      orderId: this.props.order[0].id,
+      nftId: id,
+      price: this.props.nft.price,
+      quantity: 1,
+    });
   }
 
   render() {
@@ -79,6 +77,7 @@ const mapState = (state) => ({
   nft: state.singleNFT,
   userId: state.auth.id,
   order: state.order,
+  orderDetail: state.orderDetail,
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),

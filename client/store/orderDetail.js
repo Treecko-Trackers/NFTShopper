@@ -27,7 +27,7 @@ export const boughtNFT = (nft) => {
         url: '/api/orderDetail/add',
         data: nft,
       });
-      console.log(data);
+      // console.log(data);
       dispatch(buy_NFT(data));
     } catch (err) {
       console.log('buyNFT error: ', err);
