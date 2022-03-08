@@ -12,24 +12,9 @@ const Order = db.define("order", {
   },
   isFulfilled: {
     type: Sequelize.BOOLEAN,
-    default: false,
+    defaultValue: false,
   },
 });
 
 module.exports = Order;
 
-/*
-userId: {
-    type: Sequelize.INTEGER,
-    unique: false,
-    references: {
-      model: User,
-      key: "id",
-    },
-  },
-  isFulfilled: {
-    type: Sequelize.BOOLEAN,
-    default: false,
-  },
-
-  */

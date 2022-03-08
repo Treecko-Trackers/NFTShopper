@@ -4,6 +4,7 @@ const {
 } = require("../db");
 module.exports = router;
 
+// /order/:id
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
