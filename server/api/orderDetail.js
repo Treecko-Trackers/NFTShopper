@@ -4,15 +4,31 @@ const {
 } = require('../db');
 module.exports = router;
 
-//GET /api/orderDetail/order/:orderId
-router.get('/order/:orderId', async (req, res, next) => {
+//api/orderDetail/:orderid
+router.get('/:orderId', async (req, res, next) => {
   try {
-    const data = await OrderDetail.findAll({
+    const orders = await OrderDetail.findAll({
       where: {
         orderId: req.params.orderId,
       },
     });
-    res.send(data);
+    res.send(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/:orderId', async (req, res, next) => {
+  try {
+    console.log('here');
+    res.status(201).send(
+      await OrderDetail.create({
+        orderId: req.body.orderId,
+        nftId: req.body.nftId,
+        cost: req.body.cost,
+        quantity: req.body.quantity,
+      })
+    );
   } catch (error) {
     next(error);
   }
