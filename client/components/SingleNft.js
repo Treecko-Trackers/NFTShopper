@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getSingleNFT } from "../store/singleNft";
+import {getOrder, createOrder} from "../store/order"
 
 class SingleNft extends React.Component {
   constructor(props) {
@@ -10,9 +11,15 @@ class SingleNft extends React.Component {
 
   componentDidMount() {
     this.props.getSingleNft(this.props.match.params.nftid);
+    this.props.getOrder(this.props.userId)
   }
   addToCartHandler() {
-    console.log("works");
+    console.log('currentOrder', this.props.currentOrder)
+    // if (this.props.currentOrder === {} || this.props.currentOrder === [])
+    if (this.props.currentOrder.length)
+      this.props.createOrder(this.props.userId)
+    else
+      this.props.getOrder(this.props.userId)
   }
   render() {
     return this.props.nft ? (
@@ -40,8 +47,12 @@ class SingleNft extends React.Component {
 }
 const mapState = (state) => ({
   nft: state.singleNFT,
+  currentOrder: state.order,
+  userId: state.auth.id
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),
+  getOrder: (userId) => dispatch(getOrder(userId)),
+  createOrder: (userId) => dispatch(createOrder(userId))
 });
 export default connect(mapState, mapDispatch)(SingleNft);

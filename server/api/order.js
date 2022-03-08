@@ -4,7 +4,7 @@ const {
 } = require("../db");
 module.exports = router;
 
-// /order/:id
+// api/order/:id
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -26,7 +26,7 @@ router.get("/currentOrder/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.findAll({
-      where: { userId: id, isFufilled: false },
+      where: { userId: id, isFulfilled: false },
     });
     res.send(order);
   } catch (error) {
