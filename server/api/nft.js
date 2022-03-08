@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { Op } = require('Sequelize');
 const {
   models: { NFT },
 } = require('../db');
