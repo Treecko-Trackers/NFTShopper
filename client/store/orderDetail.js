@@ -1,34 +1,61 @@
 import axios from 'axios';
 
 // ACTION TYPES
-const GET_NFT = 'GET_NFT';
+const GET_ORDER_DETAILS = 'GET_CURRENT_DETAILS';
+const CREATE_ORDER_DETAIL = 'CREATE_ORDER_DETAILS';
 
 // ACTION CREATORS
-const get_NFT = (NFT) => {
+
+// gets current order that's unfulfilled
+const get_orderDetails = (orderDetails) => {
   return {
-    type: GET_NFT,
-    NFT,
+    type: GET_ORDER_DETAILS,
+    orderDetails,
+  };
+};
+
+//creates new order
+const create_orderDetail = (orderDetail) => {
+  return {
+    type: CREATE_ORDER_DETAIL,
+    orderDetail,
   };
 };
 
 //THUNK
-export const gotNFT = (orderId) => {
+export const getOrderDetails = (orderId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/orderDetail/order/${orderId}`);
-      dispatch(get_NFT(data));
+      const { data } = await axios.get(`/api/orderDetail/${orderId}`);
+      dispatch(get_orderDetails(data));
     } catch (error) {
-      console.log('gotNFT thunk error ', error);
+      console.log('gotOrderDetails Thunk Error: ', error);
     }
   };
 };
 
-// REDUCER
-const initialState = {};
-export default function orderDetailReducer(state = initialState, action) {
+export const createOrderDetail = (orderDetail) => {
+  return async (dispatch) => {
+    try {
+      console.log(orderDetail);
+      // const {data} = await axios.post(`/api/orderDetail/${orderDetail.orderId}`, orderDetail)
+      const { data } = await axios({
+        method: 'post',
+        url: `/api/orderDetail/${orderDetail.orderId}`,
+        data: orderDetail,
+      });
+      dispatch(create_orderDetail(data));
+    } catch (error) {
+      console.log('createOrderDetail error: ', error);
+    }
+  };
+};
+export default function orderDetailReducer(state = {}, action) {
   switch (action.type) {
-    case GET_NFT:
-      return action.NFT;
+    case CREATE_ORDER_DETAIL:
+      return action.orderDetail;
+    case GET_ORDER_DETAILS:
+      return action.orderDetails;
     default:
       return state;
   }
