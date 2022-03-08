@@ -2,25 +2,8 @@ import axios from "axios";
 
 // ACTION TYPES
 const GET_ORDER_DETAILS = "GET_CURRENT_DETAILS";
-const CREATE_ORDER_DETAIL = "CREATE_ORDER_DETAILS";
-const GET_ORDER_NFT = "GET_ORDER_NFT";
-const UPDATE_ORDER_DETAIL = "UPDATE_ORDER_DETAIL";
 
 // ACTION CREATORS
-
-const get_orderNft = (orderDetail) => {
-  return {
-    type: GET_ORDER_NFT,
-    orderDetail,
-  };
-};
-
-const update_orderDetail = (updatedOrder) => {
-  return {
-    type: UPDATE_ORDER_DETAIL,
-    updatedOrder,
-  };
-};
 
 // gets current order that's unfulfilled
 const get_orderDetails = (orderDetails) => {
@@ -31,12 +14,6 @@ const get_orderDetails = (orderDetails) => {
 };
 
 //creates new order
-const create_orderDetail = (orderDetail) => {
-  return {
-    type: CREATE_ORDER_DETAIL,
-    orderDetail,
-  };
-};
 
 //THUNK
 export const getOrderDetails = (orderId) => {
@@ -50,58 +27,10 @@ export const getOrderDetails = (orderId) => {
   };
 };
 
-export const getOrderNft = (orderId, nftId) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        `/api/orderDetail/${orderId}/nft/${nftId}`
-      );
-      dispatch(get_orderNft(data));
-    } catch (error) {
-      console.log("getOrderNFT THUNK ERROR", error);
-    }
-  };
-};
-
-export const updateOrderDetail = (orderId, nftId) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.put(
-        `/api/orderDetail/${orderId}/nft/${nftId}`
-      );
-      dispatch(update_orderDetail(data));
-    } catch (error) {
-      console.log("getOrderNFT THUNK ERROR", error);
-    }
-  };
-};
-
-export const createOrderDetail = (orderDetail) => {
-  return async (dispatch) => {
-    try {
-      // console.log(orderDetail);
-      // const {data} = await axios.post(`/api/orderDetail/${orderDetail.orderId}`, orderDetail)
-      const { data } = await axios({
-        method: "post",
-        url: `/api/orderDetail/${orderDetail.orderId}`,
-        data: orderDetail,
-      });
-      dispatch(create_orderDetail(data));
-    } catch (error) {
-      console.log("createOrderDetail error: ", error);
-    }
-  };
-};
-export default function orderDetailReducer(state = {}, action) {
+export default function orderDetailReducer(state = [], action) {
   switch (action.type) {
-    case CREATE_ORDER_DETAIL:
-      return action.orderDetail;
     case GET_ORDER_DETAILS:
       return action.orderDetails;
-    case UPDATE_ORDER_DETAIL:
-      return action.updatedOrder;
-    case GET_ORDER_NFT:
-      return action.orderDetail;
     default:
       return state;
   }

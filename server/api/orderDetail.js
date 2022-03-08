@@ -19,7 +19,7 @@ router.get("/:orderId", async (req, res, next) => {
   }
 });
 
-router.post("/:orderId/nft/:nftId", async (req, res, next) => {
+router.get("/:orderId/nft/:nftId", async (req, res, next) => {
   try {
     const orders = await OrderDetail.findAll({
       where: {
@@ -33,28 +33,12 @@ router.post("/:orderId/nft/:nftId", async (req, res, next) => {
   }
 });
 
-router.post("/:orderId", async (req, res, next) => {
-  try {
-    console.log("here");
-    res.status(201).send(
-      await OrderDetail.create({
-        orderId: req.body.orderId,
-        nftId: req.body.nftId,
-        cost: req.body.cost,
-        quantity: req.body.quantity,
-      })
-    );
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.put("/:orderId/nft/:nftId", async (req, res, next) => {
   try {
+    console.log(req.body);
     const order = await OrderDetail.update(
       {
-        cost: 5000,
-        quantity: 666,
+        quantity: req.body.quantity,
       },
       {
         where: {
