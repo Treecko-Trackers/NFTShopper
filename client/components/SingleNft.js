@@ -26,17 +26,6 @@ class SingleNft extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log(this.state, "ON UPDATE");
-    // if (prevProps.currentOrder != this.props.currentOrder) {
-    //   if (this.props.currentOrder.length !== 0) {
-    //     // console.log(this.props.currentOrder);
-    //     this.props.createOrderDetail({
-    //       orderId: this.props.currentOrder.id,
-    //       nftId: this.props.nft.id,
-    //       cost: this.props.nft.price,
-    //       quantity: 1,
-    //     });
-    //   }
-    // }
   }
   componentWillUnmount;
   addToCartHandler() {
@@ -46,7 +35,7 @@ class SingleNft extends React.Component {
         ...prevState,
         orderId: this.props.currentOrder.id,
         nftId: this.props.nft.id,
-        cost: prevState.cost + Number(this.props.nft.price),
+        cost: Number(this.props.nft.price),
         quantity: prevState.quantity + 1,
       };
     });
