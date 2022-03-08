@@ -1,11 +1,10 @@
 //this is the access point for all things database related!
 
-const db = require('./db');
+const db = require("./db");
 
-const User = require('./models/User');
-const Cart = require('./models/Cart');
-const NFT = require('./models/NFT');
-const OrderDetail = require('./models/OrderDetail')
+const User = require("./models/User");
+const Order = require("./models/Order");
+const NFT = require("./models/NFT");
 
 //associations could go here!
 // Cart.belongsToMany(FT, { through: Cart_FT });
@@ -18,8 +17,7 @@ module.exports = {
   db,
   models: {
     User,
-    Cart,
     NFT,
-    OrderDetail
+    Order,
   },
 };
