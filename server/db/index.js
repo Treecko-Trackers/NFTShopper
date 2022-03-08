@@ -17,8 +17,8 @@ module.exports = {
   db,
   models: {
     User,
-    NFT,
     Order,
+    NFT,
     OrderDetail,
   },
 };

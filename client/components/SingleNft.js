@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getSingleNFT } from "../store/singleNft";
+import {getOrder, createOrder} from "../store/order"
+import {getOrderDetails, createOrderDetail} from "../store/orderDetail"
 
 class SingleNft extends React.Component {
   constructor(props) {
@@ -10,9 +12,31 @@ class SingleNft extends React.Component {
 
   componentDidMount() {
     this.props.getSingleNft(this.props.match.params.nftid);
+    this.props.getOrder(this.props.userId)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentOrder != this.props.currentOrder) {
+      if (this.props.currentOrder.length !== 0) {
+        console.log(this.props.currentOrder)
+        this.props.createOrderDetail({
+          orderId: this.props.currentOrder.id,
+          nftId: this.props.nft.id,
+          cost: this.props.nft.price,
+          quantity: 1
+        })
+      }
+    }
   }
   addToCartHandler() {
-    console.log("works");
+    // console.log('currentOrder', this.props.currentOrder)
+    if (this.props.currentOrder.length === 0)
+      this.props.createOrder(this.props.userId)
+    else
+      this.props.getOrder(this.props.userId)
+
+    // console.log('currentOrder', this.props.currentOrder)
+    // console.log('currentNFT', this.props.nft)
   }
   render() {
     return this.props.nft ? (
@@ -40,8 +64,14 @@ class SingleNft extends React.Component {
 }
 const mapState = (state) => ({
   nft: state.singleNFT,
+  currentOrder: state.order,
+  userId: state.auth.id
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),
+  getOrder: (userId) => dispatch(getOrder(userId)),
+  createOrder: (userId) => dispatch(createOrder(userId)),
+  getOrderDetails: (orderId) => dispatch(getOrderDetails(orderId)),
+  createOrderDetail: (nft) => dispatch(createOrderDetail(nft))
 });
 export default connect(mapState, mapDispatch)(SingleNft);

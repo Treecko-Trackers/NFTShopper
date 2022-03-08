@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@allanywang
-Treecko-Trackers
-/
-NFTShopper
-Public
-Code
-Issues
-10
-Pull requests
-Discussions
-Actions
-Projects
-1
-Wiki
-Security
-Insights
-More
-NFTShopper/client/store/orderDetail.js /
-@allanywang
-allanywang posting to orderdetail table but not in correct state
-Latest commit 064b0cc 9 hours ago
- History
- 1 contributor
-62 lines (56 sloc)  1.45 KB
-
 import axios from "axios"
 
 // ACTION TYPES
@@ -92,6 +60,7 @@ export default function orderDetailReducer(state = {}, action) {
       return state;
   }
 }
+<<<<<<< HEAD
 © 2022 GitHub, Inc.
 Terms
 Privacy
@@ -105,3 +74,5 @@ Training
 Blog
 About
 Loading complete
+=======
+>>>>>>> efa81d6649f2e5665741bd36c4db07b5f6988fc0
