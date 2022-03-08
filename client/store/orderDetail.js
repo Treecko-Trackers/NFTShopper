@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios"
 
 // ACTION TYPES
 const GET_ORDER_DETAILS = 'GET_CURRENT_DETAILS';
@@ -60,3 +60,7 @@ export default function orderDetailReducer(state = {}, action) {
       return state;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> de26920ccb8fe72348ce8e51d5be95f1c2cc403b
