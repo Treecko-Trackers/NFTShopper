@@ -6,6 +6,7 @@ import { createOrder } from "../store/order";
 import { getOrderDetails } from "../store/orderDetail";
 import { createOrderDetail } from "../store/singleOrderDetail";
 import { getOrderNft } from "../store/singleOrderDetail";
+import { updateOrderDetail } from "../store/singleOrderDetail";
 class SingleNft extends React.Component {
   constructor(props) {
     super(props);
@@ -23,34 +24,41 @@ class SingleNft extends React.Component {
     this.props.getSingleNft(this.props.match.params.nftid);
     this.props.getOrderNFT(this.props.userId, this.props.match.params.nftid);
     this.props.getOrder(this.props.userId);
+
     if (
       this.props.currentOrder &&
       typeof this.props.currentOrder === "object"
     ) {
-      this.props.createOrder(this.props.userId);
-    } else this.props.getOrder(this.props.userId);
+      this.props.getOrder(this.props.userId);
+    } else;
+    this.props.createOrder(this.props.userId);
   }
 
   componentDidUpdate(prevProps) {
     // console.log(this.props, "Props on UPDATE");
     if (this.props.currentOrder.id !== undefined && this.state.quantity >= 1) {
+      console.log("currentOrder has Id and state has quantity");
       if (
         Array.isArray(this.props.orderDetail) &&
         this.props.orderDetail.length >= 1
       ) {
-        console.log(this.state);
+        console.log("this.props.orderdetail is an array and greater then 1");
         this.props.updateOrderDetail({
           orderId: this.props.currentOrder.id,
           nftId: this.props.match.params.nftid,
           quantity: this.state.quantity,
         });
       } else {
-        this.props.createOrderDetail(...this.state);
+        console.log("must create a order detail");
+        this.props.createOrderDetail({
+          ...this.state,
+        });
       }
     }
   }
 
   addToCartHandler() {
+    this.props.getOrderDetails(this.props.currentOrder.id);
     // console.log(this.props, "Props on Click");
     console.log(this.props.currentOrder.id);
     this.setState((prevState) => {

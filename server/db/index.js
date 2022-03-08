@@ -10,8 +10,8 @@ const OrderDetail = require("./models/OrderDetail");
 Order.belongsTo(User);
 User.hasMany(Order);
 
-Order.belongsToMany(NFT, { through: OrderDetail });
-NFT.belongsToMany(Order, { through: OrderDetail });
+Order.belongsToMany(NFT, { through: OrderDetail, unique: false });
+NFT.belongsToMany(Order, { through: OrderDetail, unique: false });
 
 module.exports = {
   db,

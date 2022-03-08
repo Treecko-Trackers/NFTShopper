@@ -15,10 +15,10 @@ const update_orderDetail = (updatedOrder) => {
     updatedOrder,
   };
 };
-const create_orderDetail = (orderDetail) => {
+const create_orderDetail = (createOrder) => {
   return {
     type: CREATE_ORDER_DETAIL,
-    orderDetail,
+    createOrder,
   };
 };
 
@@ -76,7 +76,7 @@ export default function singleOrderDetailReducer(
 ) {
   switch (action.type) {
     case CREATE_ORDER_DETAIL:
-      return { ...state, createOrder: action.orderDetail };
+      return { ...state, createOrder: action.createOrder };
     case UPDATE_ORDER_DETAIL:
       return { ...state, updateOrder: action.updatedOrder };
     case GET_ORDER_NFT:
