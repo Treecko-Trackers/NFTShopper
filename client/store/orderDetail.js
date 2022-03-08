@@ -3,8 +3,24 @@ import axios from "axios";
 // ACTION TYPES
 const GET_ORDER_DETAILS = "GET_CURRENT_DETAILS";
 const CREATE_ORDER_DETAIL = "CREATE_ORDER_DETAILS";
+const GET_ORDER_NFT = "GET_ORDER_NFT";
+const UPDATE_ORDER_DETAIL = "UPDATE_ORDER_DETAIL";
 
 // ACTION CREATORS
+
+const get_orderNft = (orderDetail) => {
+  return {
+    type: GET_ORDER_NFT,
+    orderDetail,
+  };
+};
+
+const update_orderDetail = (updatedOrder) => {
+  return {
+    type: UPDATE_ORDER_DETAIL,
+    updatedOrder,
+  };
+};
 
 // gets current order that's unfulfilled
 const get_orderDetails = (orderDetails) => {
@@ -34,6 +50,32 @@ export const getOrderDetails = (orderId) => {
   };
 };
 
+export const getOrderNft = (orderId, nftId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `/api/orderDetail/${orderId}/nft/${nftId}`
+      );
+      dispatch(get_orderNft(data));
+    } catch (error) {
+      console.log("getOrderNFT THUNK ERROR", error);
+    }
+  };
+};
+
+export const updateOrderDetail = (orderId, nftId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(
+        `/api/orderDetail/${orderId}/nft/${nftId}`
+      );
+      dispatch(update_orderDetail(data));
+    } catch (error) {
+      console.log("getOrderNFT THUNK ERROR", error);
+    }
+  };
+};
+
 export const createOrderDetail = (orderDetail) => {
   return async (dispatch) => {
     try {
@@ -56,6 +98,10 @@ export default function orderDetailReducer(state = {}, action) {
       return action.orderDetail;
     case GET_ORDER_DETAILS:
       return action.orderDetails;
+    case UPDATE_ORDER_DETAIL:
+      return action.updatedOrder;
+    case GET_ORDER_NFT:
+      return action.orderDetail;
     default:
       return state;
   }
