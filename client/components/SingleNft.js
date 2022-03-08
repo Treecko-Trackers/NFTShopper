@@ -13,13 +13,23 @@ class SingleNft extends React.Component {
     this.props.getSingleNft(this.props.match.params.nftid);
     this.props.getOrder(this.props.userId)
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentOrder != this.props.currentOrder) {
+      if (this.props.currentOrder.length !== 0)
+        console.log('here', this.props.currentOrder)
+      // this.props.getOrder(this.props.userId)
+    }
+  }
   addToCartHandler() {
-    console.log('currentOrder', this.props.currentOrder)
-    // if (this.props.currentOrder === {} || this.props.currentOrder === [])
-    if (this.props.currentOrder.length)
+    // console.log('currentOrder', this.props.currentOrder)
+    if (this.props.currentOrder.length === 0)
       this.props.createOrder(this.props.userId)
     else
       this.props.getOrder(this.props.userId)
+
+    console.log('currentOrder', this.props.currentOrder)
+    console.log('currentNFT', this.props.nft)
   }
   render() {
     return this.props.nft ? (
