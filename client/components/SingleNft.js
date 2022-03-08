@@ -20,7 +20,7 @@ class SingleNft extends React.Component {
       if (this.props.currentOrder.length !== 0) {
         console.log(this.props.currentOrder)
         this.props.createOrderDetail({
-          orderId: this.props.currentOrder[0].id,
+          orderId: this.props.currentOrder.id,
           nftId: this.props.nft.id,
           cost: this.props.nft.price,
           quantity: 1
