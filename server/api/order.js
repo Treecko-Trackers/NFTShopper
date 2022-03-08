@@ -24,8 +24,8 @@ router.post("/:id", async (req, res, next) => {
 router.get("/currentOrder/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const order = await Order.findAll({
-      where: { userId: id, isFufilled: false },
+    const order = await Order.findOne({
+      where: { userId: id, isFulfilled: false },
     });
     res.send(order);
   } catch (error) {
