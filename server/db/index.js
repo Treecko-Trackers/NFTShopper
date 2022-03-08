@@ -5,13 +5,13 @@ const db = require("./db");
 const User = require("./models/User");
 const Order = require("./models/Order");
 const NFT = require("./models/NFT");
+const OrderDetail = require('./models/OrderDetail');
 
-//associations could go here!
-// Cart.belongsToMany(FT, { through: Cart_FT });
-// FT.belongsToMany(Cart, { through: Cart_FT });
+Order.belongsTo(User);
+User.hasMany(Order);
 
-// Cart.belongsTo(User);
-// User.hasOne(Cart);
+Order.belongsToMany(NFT, { through: OrderDetail });
+NFT.belongsToMany(Order, { through: OrderDetail });
 
 module.exports = {
   db,
@@ -19,5 +19,6 @@ module.exports = {
     User,
     NFT,
     Order,
+    OrderDetail
   },
 };
