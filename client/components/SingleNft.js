@@ -1,14 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getSingleNFT } from "../store/singleNft";
-import { getOrder, createOrder } from "../store/order";
+import { getOrder } from "../store/order";
+import { createOrder } from "../store/order";
 import { getOrderDetails } from "../store/orderDetail";
-import {
-  getOrderNft,
-  createOrderDetail,
-  updateOrderDetail,
-} from "../store/singleOrderDetail";
-
+import { createOrderDetail } from "../store/singleOrderDetail";
+import { getOrderNft } from "../store/singleOrderDetail";
 class SingleNft extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +23,12 @@ class SingleNft extends React.Component {
     this.props.getSingleNft(this.props.match.params.nftid);
     this.props.getOrderNFT(this.props.userId, this.props.match.params.nftid);
     this.props.getOrder(this.props.userId);
-    if (this.props.currentOrder.length === 0)
+    if (
+      this.props.currentOrder &&
+      typeof this.props.currentOrder === "object"
+    ) {
       this.props.createOrder(this.props.userId);
-    else this.props.getOrder(this.props.userId);
+    } else this.props.getOrder(this.props.userId);
   }
 
   componentDidUpdate(prevProps) {
