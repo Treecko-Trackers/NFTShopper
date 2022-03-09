@@ -19,9 +19,10 @@ export class AllNFTs extends React.Component {
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
-    console.log(this.props);
   }
   render() {
+    const isAdmin = this.props.isAdmin;
+    //const { isAdmin } = useSelector(state => state.auth);
     return this.props.allNFTs ? (
       <div>
         {this.props.allNFTs.map((item) => (
@@ -33,6 +34,13 @@ export class AllNFTs extends React.Component {
                 style={{ width: "200px", height: "200px" }}
               />
               <h2>${item.price}</h2>
+              <h2>${item.price}</h2>
+        {isAdmin? (
+                <>
+                  <button>edit</button>
+                  <button>delete</button>
+                </>
+              ): null }
             </div>
           </Link>
         ))}
@@ -46,6 +54,7 @@ export class AllNFTs extends React.Component {
 const mapStateToProps = (state) => {
   return {
     allNFTs: state.allNFTs,
+    isAdmin: state.auth.isAdmin
   };
 };
 
