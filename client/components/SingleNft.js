@@ -39,6 +39,7 @@ class SingleNft extends React.Component {
     // console.log('currentNFT', this.props.nft)
   }
   render() {
+    const isAdmin = this.props.isAdmin;
     return this.props.nft ? (
       <div
         style={{
@@ -56,6 +57,12 @@ class SingleNft extends React.Component {
         <p>${this.props.nft.price}</p>
         <p>Quantity: {this.props.nft.quantity}</p>
         <button onClick={this.addToCartHandler}>Add To Cart</button>
+        {isAdmin? (
+                <>
+                  <button>edit</button>
+                  <button>delete</button>
+                </>
+              ): null }
       </div>
     ) : (
       "loading"
@@ -65,7 +72,8 @@ class SingleNft extends React.Component {
 const mapState = (state) => ({
   nft: state.singleNFT,
   currentOrder: state.order,
-  userId: state.auth.id
+  userId: state.auth.id,
+  isAdmin: state.auth.isAdmin
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),

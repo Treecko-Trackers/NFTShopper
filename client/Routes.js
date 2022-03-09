@@ -1,3 +1,5 @@
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
@@ -6,8 +8,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import { me } from './store';
 import SingleNft from './components/SingleNft';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
+import Users from './components/Users';
 /**
  * COMPONENT
  */
@@ -25,6 +26,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/admin/users" component={Users} />
             <Route exact path="/NFTs" component={AllNFTs} />
             <Route exact path="/NFTs/:nftid" component={SingleNft} />
             <Route path="/home" component={AllNFTs} />

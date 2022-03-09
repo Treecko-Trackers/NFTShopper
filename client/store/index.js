@@ -7,6 +7,7 @@ import NFTReducer from './nft';
 import SingleNFTReducer from './singleNft';
 import orderReducer from './order';
 import orderDetailReducer from './orderDetail';
+import UserReducer from './users';
 
 const reducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   singleNFT: SingleNFTReducer,
   order: orderReducer,
   orderDetails: orderDetailReducer,
+  allUsers: UserReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
