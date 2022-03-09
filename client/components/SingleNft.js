@@ -20,47 +20,31 @@ class SingleNft extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props, "Props on Mount");
     this.props.getSingleNft(this.props.match.params.nftid);
-    this.props.getOrderNFT(this.props.userId, this.props.match.params.nftid);
+    //
     this.props.getOrder(this.props.userId);
+    this.props, "Props on Mount";
 
-    if (
-      this.props.currentOrder &&
-      typeof this.props.currentOrder === "object"
-    ) {
-      this.props.getOrder(this.props.userId);
-    } else;
-    this.props.createOrder(this.props.userId);
-  }
-
-  componentDidUpdate(prevProps) {
-    // console.log(this.props, "Props on UPDATE");
-    if (this.props.currentOrder.id !== undefined && this.state.quantity >= 1) {
-      console.log("currentOrder has Id and state has quantity");
-      if (
-        Array.isArray(this.props.orderDetail) &&
-        this.props.orderDetail.length >= 1
-      ) {
-        console.log("this.props.orderdetail is an array and greater then 1");
-        this.props.updateOrderDetail({
-          orderId: this.props.currentOrder.id,
-          nftId: this.props.match.params.nftid,
-          quantity: this.state.quantity,
-        });
-      } else {
-        console.log("must create a order detail");
-        this.props.createOrderDetail({
-          ...this.state,
-        });
-      }
+    if (this.props.currentOrder.id > 0) {
+      ("GET ORDER NFT");
+      this.props.getOrderNFT(
+        this.props.currentOrder.id,
+        this.props.match.params.nftid
+      );
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.currentOrder === "")
+      this.props.createOrder(this.props.userId);
+  }
+
   addToCartHandler() {
-    this.props.getOrderDetails(this.props.currentOrder.id);
-    // console.log(this.props, "Props on Click");
-    console.log(this.props.currentOrder.id);
+    this.props.getOrderNFT(
+      this.props.currentOrder.id,
+      this.props.match.params.nftid
+    );
+
     this.setState((prevState) => {
       return {
         ...prevState,
@@ -71,10 +55,26 @@ class SingleNft extends React.Component {
       };
     });
 
-    // console.log('currentOrder', this.props.currentOrder)
-    // console.log('currentOrder', this.props.currentOrder)
-    // console.log('currentNFT', this.props.nft)
-    // console.log(this.state, "ON CLICK");
+    if (this.props.singleOrderDetail !== {}) {
+      this.props.updateOrderDetail({
+        orderId: this.props.currentOrder.id,
+        nftId: this.props.match.params.nftid,
+        quantity: this.state.quantity,
+      });
+    } else {
+      this.props.createOrderDetail({
+        ...this.state,
+      });
+    }
+
+    // this.props.createOrderDetail({
+    //   ...this.state,
+    // });
+
+    // ('currentOrder', this.props.currentOrder)
+    // ('currentOrder', this.props.currentOrder)
+    // ('currentNFT', this.props.nft)
+    // (this.state, "ON CLICK");
   }
   render() {
     return this.props.nft ? (
@@ -105,6 +105,7 @@ const mapState = (state) => ({
   currentOrder: state.order,
   userId: state.auth.id,
   orderDetail: state.orderDetails,
+  singleOrderDetail: state.singleOrder,
 });
 const mapDispatch = (dispatch) => ({
   getSingleNft: (id) => dispatch(getSingleNFT(id)),

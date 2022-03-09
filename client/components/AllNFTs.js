@@ -15,11 +15,11 @@ export class AllNFTs extends React.Component {
   // useEffect(() => {
   //   props.fetchFTs();
   //   if (props.allFTs) setAllFTs(...props.allFTs);
-  //   console.log('props', props.allFTs);
+  //   ('props', props.allFTs);
   // }, []);
   componentDidMount() {
     this.props.fetchNFTs();
-    console.log(this.props);
+    this.props;
   }
   render() {
     return this.props.allNFTs ? (
@@ -65,7 +65,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AllNFTs);
 //   useEffect(() => {
 //     dispatch(fetchFTs());
 //     setAllFTs(AllFTs);
-//     console.log('props', props);
+//     ('props', props);
 //   }, []);
 
 //   return AllFTs ? (
