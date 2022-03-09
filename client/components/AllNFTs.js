@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { fetchNFTs } from "../store/nft";
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { fetchNFTs } from '../store/nft';
+import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class AllNFTs extends React.Component {
   constructor(props) {
@@ -31,22 +31,21 @@ export class AllNFTs extends React.Component {
               <h1>{item.name}</h1>
               <img
                 src={item.imageUrl}
-                style={{ width: "200px", height: "200px" }}
+                style={{ width: '200px', height: '200px' }}
               />
               <h2>${item.price}</h2>
-              <h2>${item.price}</h2>
-        {isAdmin? (
+              {isAdmin ? (
                 <>
                   <button>edit</button>
                   <button>delete</button>
                 </>
-              ): null }
+              ) : null}
             </div>
           </Link>
         ))}
       </div>
     ) : (
-      <div>{"loading"}</div>
+      <div>{'loading'}</div>
     );
   }
 }
@@ -54,7 +53,7 @@ export class AllNFTs extends React.Component {
 const mapStateToProps = (state) => {
   return {
     allNFTs: state.allNFTs,
-    isAdmin: state.auth.isAdmin
+    isAdmin: state.auth.isAdmin,
   };
 };
 
