@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { fetchNFTs } from "../store/nft";
 import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+// import { connect } from "react-redux";
+ import { Link } from "react-router-dom";
+// import { startSession } from "pg/lib/sasl";
 
-export class AllNFTs extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  // const dispatch = useDispatch();
-  // const [AllFTs, setAllFTs] = useState([]);
-  // const { FTs } = useSelector((state) => ({ FTs: state.FTs }));
+function AllNFTs(){
 
-  // useEffect(() => {
-  //   props.fetchFTs();
-  //   if (props.allFTs) setAllFTs(...props.allFTs);
-  //   console.log('props', props.allFTs);
-  // }, []);
-  componentDidMount() {
-    this.props.fetchNFTs();
-    console.log(this.props);
-  }
-  render() {
-    return this.props.allNFTs ? (
+  const  NFTs  = useSelector(state => state.allNFTs );
+  const { isAdmin } = useSelector(state => state.auth);
+  const [AllFTs, setAllFTs] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchNFTs());
+   }, []);
+    return NFTs ? (
       <div>
-        {this.props.allNFTs.map((item) => (
+        {NFTs.map((item) => (
           <Link key={item.id} to={`/NFTs/${item.id}`}>
             <div>
               <h1>{item.name}</h1>
@@ -33,6 +26,12 @@ export class AllNFTs extends React.Component {
                 style={{ width: "200px", height: "200px" }}
               />
               <h2>${item.price}</h2>
+              {!isAdmin? null : (
+                <>
+                  <button>edit</button>
+                  <button>delete</button>
+                </>
+              )}
             </div>
           </Link>
         ))}
@@ -41,21 +40,12 @@ export class AllNFTs extends React.Component {
       <div>{"loading"}</div>
     );
   }
-}
 
-const mapStateToProps = (state) => {
-  return {
-    allNFTs: state.allNFTs,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchNFTs: () => dispatch(fetchNFTs()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllNFTs);
+
+
+export default AllNFTs
 
 // const AllNFTs = (props) => {
 //   const dispatch = useDispatch();

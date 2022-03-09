@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import NFTReducer from "./nft";
 import SingleNFTReducer from "./singleNft";
+import UserReducer from "./users";
 
 const reducer = combineReducers({
   auth,
   allNFTs: NFTReducer,
   singleNFT: SingleNFTReducer,
+  allUsers: UserReducer
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

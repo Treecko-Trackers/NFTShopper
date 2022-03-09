@@ -1,20 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import { getSingleNFT } from "../store/singleNft";
+import React, { useState, useEffect } from "react";
+//import { connect } from "react-redux";
+import { getSingleNFT, resetItem } from "../store/singleNft";
+import { useDispatch, useSelector } from "react-redux";
 
-class SingleNft extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+function SingleNft(props){
+  const  NFT  = useSelector(state => state.singleNFT);
+  
+  const {isAdmin } = useSelector(state => state.auth)
+  //const [AllFTs, setAllFTs] = useState([]);
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    this.props.getSingleNft(this.props.match.params.nftid);
-
-    console.log(this.props.nft, "single nft");
-    console.log("id:", this.props.match.params.nftid);
-  }
-  render() {
-    return this.props.nft ? (
+  useEffect(() => {
+    dispatch(getSingleNFT(props.match.params.nftid));
+  }, []);
+    return NFT ? (
       <div
         style={{
           textAlign: "center",
@@ -25,21 +24,22 @@ class SingleNft extends React.Component {
           minHeight: "100vh",
         }}
       >
-        <img src={this.props.nft.imageUrl} style={{ maxWidth: "400px" }} />
-        <h1>{this.props.nft.name}</h1>
-        <h3>{this.props.nft.artist}</h3>
-        <p>${this.props.nft.price}</p>
-        <p>Quantity: {this.props.nft.quantity}</p>
+        <img src={NFT.imageUrl} style={{ maxWidth: "400px" }} />
+        <h1>{NFT.name}</h1>
+        <h3>{NFT.artist}</h3>
+        <p>${NFT.price}</p>
+        <p>Quantity: {NFT.quantity}</p>
+        {!isAdmin? null : (
+                <>
+                  <button>edit</button>
+                  <button>delete</button>
+                </>
+              )}
       </div>
     ) : (
       "loading"
     );
   }
-}
-const mapState = (state) => ({
-  nft: state.singleNFT,
-});
-const mapDispatch = (dispatch) => ({
-  getSingleNft: (id) => dispatch(getSingleNFT(id)),
-});
-export default connect(mapState, mapDispatch)(SingleNft);
+
+
+export default SingleNft
