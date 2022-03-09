@@ -1,24 +1,33 @@
 import React from 'react';
 import { markedFulfilled } from '../store/order';
 import { connect } from 'react-redux';
+import { getOrder } from '../store/order';
+import { getOrderDetails } from '../store/orderDetail';
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props);
+    this.orderConfirmed = this.orderConfirmed.bind(this);
+    this.markFulfilled = this.markFulfilled.bind(this);
+  }
+  componentDidMount() {
+    this.props.getOrder(this.props.userId);
+    this.props.getOrderDetails(this.props.orderId);
   }
   orderConfirmed() {
     alert('Order Confirmed');
   }
-  markFulfilled() {
+  fulfillOrder() {
     // NEED TO PASS orderID into markFulfilled
-    this.props.markFulfilled(this.props.order.id);
+    this.props.markFulfilled(this.props.userId);
   }
   render() {
     console.log('props', this.props);
+    console.log('user id', this.props.userId);
+    const order = this.props.orderDetails;
     return (
-      // COPY AND PASTE FROM CART.JS ONCE COMPLETE
       <div>
-        Checkout
+        <h2>Checkout:</h2>
         <div>
           <input type="text" placeholder="Card Number" />
           <input type="text" placeholder="MM/YY" />
@@ -38,14 +47,23 @@ export class Checkout extends React.Component {
           <input type="text" placeholder="State" />
           <input type="text" placeholder="Zip Code" />
         </div>
+        <br />
         <button
           onClick={() => {
             this.orderConfirmed();
-            markedFulfilled();
+            this.props.fulfillOrder();
           }}
         >
           Submit Payment
         </button>
+
+        <div>
+          <br />
+          <h2>Order Summary:</h2>
+          <h3>Name: {order.nftId}</h3>
+          <h3>Price: ${order.cost}</h3>
+          <h3>Quantity: {order.quantity}</h3>
+        </div>
       </div>
     );
   }
@@ -54,12 +72,16 @@ export class Checkout extends React.Component {
 const mapStateToProps = (state) => {
   return {
     order: state.order,
+    orderDetails: state.orderDetails,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    markedFulfilled: (orderId) => dispatch(markedFulfilled(orderId)),
+    getOrder: (orderId) => dispatch(getOrder(orderId)),
+    markedFulfilled: (userId) => dispatch(markedFulfilled(userId)),
+    getOrderDetails: (orderId) => dispatch(getOrderDetails(orderId)),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios';
 
 // ACTION TYPES
 const GET_ORDER_DETAILS = 'GET_CURRENT_DETAILS';
@@ -13,7 +13,6 @@ const get_orderDetails = (orderDetails) => {
     orderDetails,
   };
 };
-
 //creates new order
 const create_orderDetail = (orderDetail) => {
   return {
@@ -27,6 +26,7 @@ export const getOrderDetails = (orderId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/orderDetail/${orderId}`);
+      // console.log('data', data);
       dispatch(get_orderDetails(data));
     } catch (error) {
       console.log('gotOrderDetails Thunk Error: ', error);
@@ -60,7 +60,3 @@ export default function orderDetailReducer(state = {}, action) {
       return state;
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> de26920ccb8fe72348ce8e51d5be95f1c2cc403b

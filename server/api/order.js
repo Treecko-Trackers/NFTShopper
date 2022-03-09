@@ -4,18 +4,8 @@ const {
 } = require('../db');
 module.exports = router;
 
-// PUT /api/order/:orderId/complete
-router.put('/:orderId/complete', async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const findOrder = await Order.findByPk(id);
-    const status = findOrder.isFulfilled;
-    if (status !== 'TRUE') {
-      await Order.update({ isFulfilled: 'TRUE' }, { where: { id: id } });
-    }
-    const order = await Order.findByPk(id);
-
-router.get("/:id", async (req, res, next) => {
+// GET /api/order/:id
+router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.findAll({ where: { userId: id } });
@@ -25,14 +15,31 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/:id", async (req, res, next) => {
+// PUT /api/order/:userId/complete
+router.put('/:userId/complete', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const findOrder = await Order.findByPk(id);
+    const status = findOrder.isFulfilled;
+    if (status !== 'TRUE') {
+      await Order.update({ isFulfilled: 'TRUE' }, { where: { userId: id } });
+    }
+    const order = await Order.findByPk(id);
+    res.send(order);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST /api/order/:id
+router.post('/:id', async (req, res, next) => {
   const { id } = req.params;
   const order = await Order.create({ userId: id });
   res.send(order);
 });
 
-//Filtered Order
-router.get("/currentOrder/:id", async (req, res, next) => {
+// GET /api/order/currentOrder/:id - Filtered Order
+router.get('/currentOrder/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.findOne({
@@ -42,4 +49,4 @@ router.get("/currentOrder/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
